@@ -14,15 +14,17 @@ int main() {
     bus.write32(0x102, 0x12345678);
     bus.write16(0x106, 0x7005);
     bus.write16(0x108, 0x72FF);
-    bus.write16(0x10A, 0x4E71);
-    bus.write16(0x10C, 0x6A02);
-    bus.write16(0x10E, 0x6002);
-    bus.write16(0x110, 0xFFFF);
-    bus.write16(0x112, 0x6104);
-    bus.write16(0x114, 0x6000);
-    bus.write16(0x116, 0x0002);
-    bus.write16(0x118, 0x4E75);
-    bus.write16(0x11A, 0xFFFF);
+    bus.write16(0x10A, 0x5080); // ADDQ.L #8,D0 -> D0=13
+    bus.write16(0x10C, 0x5181); // SUBQ.L #8,D1 -> D1=-9
+    bus.write16(0x10E, 0x4E71);
+    bus.write16(0x110, 0x6A02);
+    bus.write16(0x112, 0x6002);
+    bus.write16(0x114, 0xFFFF);
+    bus.write16(0x116, 0x6104);
+    bus.write16(0x118, 0x6000);
+    bus.write16(0x11A, 0x0002);
+    bus.write16(0x11C, 0x4E75);
+    bus.write16(0x11E, 0xFFFF);
 
     satari360::M68000 cpu(bus);
     cpu.reset();
@@ -31,15 +33,17 @@ int main() {
     assert(cpu.step() && cpu.data_register(0) == 5);
     assert(cpu.step() && cpu.data_register(1) == 0xFFFFFFFFu);
     assert((cpu.sr() & 0x0008u) != 0);
-    assert(cpu.step());
-    assert(cpu.step() && cpu.pc() == 0x110); // BPL not taken
-    assert(cpu.step() && cpu.pc() == 0x112); // BRA.s
-    assert(cpu.step() && cpu.pc() == 0x118); // BSR.s
-    assert(bus.read32(0x3EC) == 0x114);
-    assert(cpu.step() && cpu.pc() == 0x114); // RTS
-    assert(cpu.step() && cpu.pc() == 0x11A); // BRA.w
+    assert(cpu.step() && cpu.data_register(0) == 13); // ADDQ.L #8,D0
+    assert(cpu.step() && cpu.data_register(1) == 0xFFFFFFF7u); // SUBQ.L #8,D1
+    assert(cpu.step()); // NOP
+    assert(cpu.step() && cpu.pc() == 0x114); // BPL not taken
+    assert(cpu.step() && cpu.pc() == 0x116); // BRA.s
+    assert(cpu.step() && cpu.pc() == 0x11C); // BSR.s
+    assert(bus.read32(0x3EC) == 0x118);
+    assert(cpu.step() && cpu.pc() == 0x118); // RTS
+    assert(cpu.step() && cpu.pc() == 0x11E); // BRA.w
     assert(!cpu.step());
     assert(cpu.halted());
-    assert(cpu.pc() == 0x11C);
+    assert(cpu.pc() == 0x120);
     return 0;
 }
