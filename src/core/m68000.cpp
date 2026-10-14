@@ -72,6 +72,14 @@ bool M68000::step() {
         ++instructions_executed_;
         return true;
     }
+    if ((opcode & 0xF1FFu) == 0x203Cu) { // MOVE.L #imm32,Dn
+        const unsigned reg = (opcode >> 9) & 7u;
+        d_[reg] = bus_.read32(pc_);
+        pc_ += 4;
+        set_nz32(d_[reg]);
+        ++instructions_executed_;
+        return true;
+    }
     if ((opcode & 0xF100u) == 0x7000u) { // MOVEQ #imm8,Dn
         const unsigned reg = (opcode >> 9) & 7u;
         const std::int32_t imm = static_cast<std::int8_t>(opcode & 0xFFu);
