@@ -39,6 +39,14 @@
 - [ ] Confirmar resultado do workflow após sua execução no GitHub.
 - [ ] Corrigir qualquer falha de compilação ou teste antes de avançar.
 
+## v0.6b — expansão experimental da CPU
+- [x] Adicionar decodificação inicial de MOVE.L com operando imediato para registrador Dn.
+- [x] Ampliar o teste de fumaça para verificar a leitura do imediato de 32 bits.
+- [x] Manter testes de desvios curtos/estendidos, BSR e RTS.
+- [ ] Executar o workflow e validar os testes no host.
+- [ ] Corrigir semântica de instruções e flags com testes de referência.
+- [ ] Continuar expansão gradual do conjunto de instruções 68000.
+
 ## v0.5b — mídia e entrada
 - [ ] Imagens .ST/.MSA.
 - [ ] Teclado, joystick e mouse.
