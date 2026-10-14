@@ -33,6 +33,12 @@
 - [ ] Completar instruções, exceções e precisão de temporização.
 - [ ] Iniciar shifter, modos gráficos, YM2149, MFP 68901 e ACIA.
 
+## v0.5b — validação automatizada inicial
+- [x] Workflow GitHub Actions para configurar, compilar e executar testes no host.
+- [x] Testes de fumaça expandidos para branches e chamadas/retornos.
+- [ ] Confirmar resultado do workflow após sua execução no GitHub.
+- [ ] Corrigir qualquer falha de compilação ou teste antes de avançar.
+
 ## v0.5b — mídia e entrada
 - [ ] Imagens .ST/.MSA.
 - [ ] Teclado, joystick e mouse.
