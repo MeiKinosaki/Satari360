@@ -14,10 +14,15 @@
 - [ ] Validar o comportamento com uma ROM TOS legalmente obtida.
 - [ ] Executar o teste no ambiente de build-alvo.
 
-## v0.3b — CPU Motorola 68000
-- [ ] Selecionar/integrar um núcleo com licença compatível.
-- [ ] Estado de registradores, reset e ciclo de execução.
-- [ ] Exceções, interrupções e acesso ao barramento.
+## v0.3b — CPU Motorola 68000 (esqueleto inicial)
+- [x] Estado inicial dos registradores D0-D7/A0-A7 e SR.
+- [x] Vetores de reset lidos pelo barramento.
+- [x] Instruções NOP, MOVEQ, BRA de deslocamento curto e RTS (implementação limitada).
+- [x] Parada explícita ao encontrar opcode ainda não suportado.
+- [x] Teste de fumaça integrado ao CMake.
+- [ ] Validar compilação e executar testes no host.
+- [ ] Integrar um núcleo 68000 completo, com licença compatível.
+- [ ] Implementar exceções, interrupções e conjunto de instruções completo.
 
 ## v0.4b — periféricos básicos
 - [ ] Shifter e modos gráficos.
