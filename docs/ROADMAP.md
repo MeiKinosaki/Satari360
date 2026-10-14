@@ -24,10 +24,14 @@
 - [ ] Integrar um núcleo 68000 completo, com licença compatível.
 - [ ] Implementar exceções, interrupções e conjunto de instruções completo.
 
-## v0.4b — periféricos básicos
-- [ ] Shifter e modos gráficos.
-- [ ] YM2149, MFP 68901 e ACIA.
-- [ ] Temporização e interrupções.
+## v0.4b — expansão experimental da CPU 68000
+- [x] BRA/Bcc com deslocamento curto e extensão de 16 bits.
+- [x] BSR com salvamento do PC de retorno na pilha.
+- [x] Avaliação inicial das condições de branch por flags N/Z/V/C.
+- [x] Testes de fumaça para alguns fluxos de execução.
+- [ ] Executar os testes e corrigir eventuais falhas.
+- [ ] Completar instruções, exceções e precisão de temporização.
+- [ ] Iniciar shifter, modos gráficos, YM2149, MFP 68901 e ACIA.
 
 ## v0.5b — mídia e entrada
 - [ ] Imagens .ST/.MSA.
