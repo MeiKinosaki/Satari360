@@ -2,7 +2,7 @@
 
 Emulador de Atari ST para Xbox 360.
 
-**Versão:** 0.4b  
+**Versão:** 0.5b  
 **Estado:** estrutura inicial de desenvolvimento; ainda não é um emulador funcional.
 
 ## Objetivo
@@ -24,8 +24,8 @@ Desenvolver uma aplicação para Xbox 360 capaz de emular a família Atari ST, c
 - `tests/`: testes de fumaça no host
 - `docs/ROADMAP.md`: etapas de desenvolvimento
 
-## Situação da versão 0.4b
-A CPU experimental agora reconhece NOP, MOVEQ, RTS, BRA/Bcc com deslocamento curto ou extensão de 16 bits e BSR, com avaliação inicial de condições usando as flags N/Z/V/C. O teste de fumaça cobre alguns desses caminhos. O conjunto de instruções continua muito incompleto; exceções e temporização reais ainda não estão implementadas. Os testes foram escritos, mas não executados neste ambiente. Periféricos, vídeo, áudio, integração Xbox 360 e `default.xex` continuam pendentes.
+## Situação da versão 0.5b
+A CPU experimental reconhece NOP, MOVEQ, RTS, BRA/Bcc com deslocamento curto ou extensão de 16 bits e BSR, com avaliação inicial das condições usando as flags N/Z/V/C. Foram ampliados os testes de fumaça e adicionado o workflow `.github/workflows/host-tests.yml`, que configura, compila e executa os testes com CMake/CTest no GitHub Actions. O workflow está configurado, mas sua execução e resultado precisam ser verificados no GitHub. O conjunto de instruções ainda é muito incompleto; exceções, temporização real, periféricos, vídeo, áudio, integração Xbox 360 e `default.xex` continuam pendentes.
 
 ## Próximas etapas
 1. Completar o mapa de memória Atari ST, incluindo regiões de I/O e registradores de periféricos.
