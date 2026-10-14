@@ -6,6 +6,31 @@ const std::uint16_t kFlagC = 0x0001;
 const std::uint16_t kFlagV = 0x0002;
 const std::uint16_t kFlagZ = 0x0004;
 const std::uint16_t kFlagN = 0x0008;
+
+bool condition_true(unsigned condition, std::uint16_t sr) {
+    const bool c = (sr & kFlagC) != 0;
+    const bool v = (sr & kFlagV) != 0;
+    const bool z = (sr & kFlagZ) != 0;
+    const bool n = (sr & kFlagN) != 0;
+    switch (condition) {
+        case 0: return true;             // T
+        case 2: return !c && !z;         // HI
+        case 3: return c || z;           // LS
+        case 4: return !c;               // CC
+        case 5: return c;                // CS
+        case 6: return !z;               // NE
+        case 7: return z;                // EQ
+        case 8: return !v;               // VC
+        case 9: return v;                // VS
+        case 10: return !n;              // PL
+        case 11: return n;               // MI
+        case 12: return n == v;          // GE
+        case 13: return n != v;          // LT
+        case 14: return !z && (n == v);  // GT
+        case 15: return z || (n != v);   // LE
+        default: return false;           // condition 1 is BSR, handled separately
+    }
+}
 }
 
 M68000::M68000(MemoryBus& bus)
@@ -55,14 +80,24 @@ bool M68000::step() {
         ++instructions_executed_;
         return true;
     }
-    if ((opcode & 0xFF00u) == 0x6000u) { // BRA with 8-bit displacement
-        const std::int8_t displacement = static_cast<std::int8_t>(opcode & 0xFFu);
-        if (displacement == 0) {
-            // 16-bit extension form is intentionally not implemented yet.
-            halted_ = true;
-            return false;
+    if ((opcode & 0xF000u) == 0x6000u) { // Bcc, BRA and BSR
+        const unsigned condition = (opcode >> 8) & 0x0Fu;
+        const std::uint8_t short_disp = static_cast<std::uint8_t>(opcode & 0xFFu);
+        std::int32_t displacement;
+        if (short_disp == 0) {
+            displacement = static_cast<std::int16_t>(bus_.read16(pc_));
+            pc_ += 2;
+        } else {
+            displacement = static_cast<std::int8_t>(short_disp);
         }
-        pc_ = static_cast<std::uint32_t>(pc_ + static_cast<std::int32_t>(displacement));
+
+        if (condition == 1) { // BSR: push return PC and branch
+            a_[7] -= 4;
+            bus_.write32(a_[7], pc_);
+            pc_ = static_cast<std::uint32_t>(pc_ + displacement);
+        } else if (condition_true(condition, sr_)) {
+            pc_ = static_cast<std::uint32_t>(pc_ + displacement);
+        }
         ++instructions_executed_;
         return true;
     }
