@@ -36,7 +36,7 @@ int main() {
     assert(cpu.step() && cpu.data_register(0) == 13); // ADDQ.L #8,D0
     assert(cpu.step() && cpu.data_register(1) == 0xFFFFFFF7u); // SUBQ.L #8,D1
     assert(cpu.step()); // NOP
-    assert(cpu.step() && cpu.pc() == 0x114); // BPL not taken
+    assert(cpu.step() && cpu.pc() == 0x112); // BPL not taken
     assert(cpu.step() && cpu.pc() == 0x116); // BRA.s
     assert(cpu.step() && cpu.pc() == 0x11C); // BSR.s
     assert(bus.read32(0x3EC) == 0x118);
