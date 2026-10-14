@@ -47,6 +47,15 @@
 - [ ] Corrigir semântica de instruções e flags com testes de referência.
 - [ ] Continuar expansão gradual do conjunto de instruções 68000.
 
+## v0.7b — operações rápidas de registrador
+- [x] Implementar ADDQ.L imediato para Dn.
+- [x] Implementar SUBQ.L imediato para Dn.
+- [x] Atualizar flags N/Z/V/C de forma inicial para essas operações.
+- [x] Ampliar testes para verificar resultados e fluxo de execução.
+- [x] Corrigir expectativa de PC no teste de BPL não tomado.
+- [ ] Executar compilação e CTest no host e revisar os resultados.
+- [ ] Adicionar testes de limites, overflow, carry e zero antes de considerar a semântica validada.
+
 ## v0.5b — mídia e entrada
 - [ ] Imagens .ST/.MSA.
 - [ ] Teclado, joystick e mouse.
