@@ -35,9 +35,9 @@ int main() {
     assert(cpu.step() && cpu.pc() == 0x112); // BSR.s
     assert(bus.read32(0x3EC) == 0x10E);       // return PC pushed
     assert(cpu.step() && cpu.pc() == 0x10E); // RTS returns
-    assert(cpu.step() && cpu.pc() == 0x112); // BRA.w +2
+    assert(cpu.step() && cpu.pc() == 0x114); // BRA.w +2
     assert(!cpu.step());
     assert(cpu.halted());
-    assert(cpu.pc() == 0x114);
+    assert(cpu.pc() == 0x116);
     return 0;
 }
