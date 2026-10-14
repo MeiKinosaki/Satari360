@@ -2,7 +2,7 @@
 
 Emulador de Atari ST para Xbox 360.
 
-**Versão:** 0.3b  
+**Versão:** 0.4b  
 **Estado:** estrutura inicial de desenvolvimento; ainda não é um emulador funcional.
 
 ## Objetivo
@@ -24,8 +24,8 @@ Desenvolver uma aplicação para Xbox 360 capaz de emular a família Atari ST, c
 - `tests/`: testes de fumaça no host
 - `docs/ROADMAP.md`: etapas de desenvolvimento
 
-## Situação da versão 0.3b
-Além do barramento de memória inicial, foi adicionado um esqueleto de CPU Motorola 68000 em `src/core/m68000.*`, com vetores de reset, registradores D/A, SR, contador de instruções e suporte limitado a NOP, MOVEQ, BRA de deslocamento curto e RTS. OpCodes não implementados interrompem a execução explicitamente. Há um teste de fumaça em `tests/m68000_smoke.cpp`, integrado ao CMake. Os testes ainda não foram compilados nem executados; esta CPU não é completa e não executa jogos Atari ST. Periféricos, vídeo, áudio, integração Xbox 360 e `default.xex` continuam pendentes.
+## Situação da versão 0.4b
+A CPU experimental agora reconhece NOP, MOVEQ, RTS, BRA/Bcc com deslocamento curto ou extensão de 16 bits e BSR, com avaliação inicial de condições usando as flags N/Z/V/C. O teste de fumaça cobre alguns desses caminhos. O conjunto de instruções continua muito incompleto; exceções e temporização reais ainda não estão implementadas. Os testes foram escritos, mas não executados neste ambiente. Periféricos, vídeo, áudio, integração Xbox 360 e `default.xex` continuam pendentes.
 
 ## Próximas etapas
 1. Completar o mapa de memória Atari ST, incluindo regiões de I/O e registradores de periféricos.
