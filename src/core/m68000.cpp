@@ -80,7 +80,7 @@ bool M68000::step() {
         ++instructions_executed_;
         return true;
     }
-    if ((opcode & 0xF1F8u) == 0x5080u || (opcode & 0xF1F8u) == 0x5180u) { // ADDQ.L/SUBQ.L #n,Dn
+    if ((opcode & 0xF1F8u) == 0x5080u) { // ADDQ.L/SUBQ.L #n,Dn
         const unsigned reg = opcode & 7u;
         unsigned quick = (opcode >> 9) & 7u;
         if (quick == 0) quick = 8;
