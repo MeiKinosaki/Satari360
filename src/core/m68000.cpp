@@ -80,6 +80,28 @@ bool M68000::step() {
         ++instructions_executed_;
         return true;
     }
+    if ((opcode & 0xF1F8u) == 0x5080u || (opcode & 0xF1F8u) == 0x5180u) { // ADDQ.L/SUBQ.L #n,Dn
+        const unsigned reg = opcode & 7u;
+        unsigned quick = (opcode >> 9) & 7u;
+        if (quick == 0) quick = 8;
+        const bool subtract = (opcode & 0x0100u) != 0;
+        const std::uint32_t old_value = d_[reg];
+        const std::uint32_t operand = static_cast<std::uint32_t>(quick);
+        const std::uint32_t result = subtract ? old_value - operand : old_value + operand;
+        sr_ &= static_cast<std::uint16_t>(~(kFlagN | kFlagZ | kFlagV | kFlagC));
+        if (result == 0) sr_ |= kFlagZ;
+        if ((result & 0x80000000u) != 0) sr_ |= kFlagN;
+        if (subtract) {
+            if (old_value < operand) sr_ |= kFlagC;
+            if (((old_value ^ operand) & (old_value ^ result) & 0x80000000u) != 0) sr_ |= kFlagV;
+        } else {
+            if (result < old_value) sr_ |= kFlagC;
+            if (((~(old_value ^ operand)) & (old_value ^ result) & 0x80000000u) != 0) sr_ |= kFlagV;
+        }
+        d_[reg] = result;
+        ++instructions_executed_;
+        return true;
+    }
     if ((opcode & 0xF100u) == 0x7000u) { // MOVEQ #imm8,Dn
         const unsigned reg = (opcode >> 9) & 7u;
         const std::int32_t imm = static_cast<std::int8_t>(opcode & 0xFFu);
