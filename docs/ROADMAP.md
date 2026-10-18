@@ -66,3 +66,16 @@
 - [ ] Testes de compatibilidade, desempenho e estabilidade.
 
 > Os itens marcados como concluídos referem-se aos arquivos e testes implementados neste repositório. O teste precisa ser compilado e executado para ser considerado validado; a integração Xbox 360 não está concluída.
+
+
+## v0.8b — integração inicial da máquina
+- [x] Criar classe `Machine` que possui barramento e CPU.
+- [x] Adicionar interface para carregar uma ROM fornecida pelo chamador.
+- [x] Reiniciar a CPU a partir dos vetores lidos no barramento.
+- [x] Adicionar execução limitada por orçamento de instruções.
+- [x] Adicionar teste de fumaça com ROM sintética.
+- [x] Documentar arquitetura e limitações em `docs/ARCHITECTURE.md`.
+- [ ] Compilar e executar os testes no host e corrigir falhas.
+- [ ] Modelar o mapa de memória real do Atari ST e I/O mapeado.
+- [ ] Implementar periféricos e vídeo/áudio antes de alegar compatibilidade com jogos.
+- [ ] Validar separadamente a toolchain e o executável Xbox 360.
