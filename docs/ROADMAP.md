@@ -79,3 +79,13 @@
 - [ ] Modelar o mapa de memória real do Atari ST e I/O mapeado.
 - [ ] Implementar periféricos e vídeo/áudio antes de alegar compatibilidade com jogos.
 - [ ] Validar separadamente a toolchain e o executável Xbox 360.
+
+## v0.9b — primeiros módulos de vídeo e som
+- [x] Criar modelo de registradores do Shifter em `atari_video.*`.
+- [x] Criar latch de registradores YM2149 em `ym2149.*`.
+- [x] Adicionar teste de fumaça para registradores de vídeo/PSG.
+- [x] Integrar os módulos ao CMake.
+- [ ] Confirmar compilação e execução dos testes no host.
+- [ ] Ligar registradores de hardware ao barramento de memória da máquina.
+- [ ] Implementar fetch de pixels/timing de vídeo e síntese de áudio real.
+- [ ] Continuar com MFP/ACIA, teclado/joystick e controladora WD1772.
