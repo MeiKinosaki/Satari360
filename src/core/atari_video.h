@@ -9,7 +9,7 @@ namespace satari360 {
 // Initial Atari ST Shifter register model; timing and pixel fetch are not emulated yet.
 class AtariVideo : public BusDevice {
 public:
-    static constexpr std::uint16_t kBaseAddress = 0x00FF8200;
+    static constexpr std::uint32_t kBaseAddress = 0x00FF8200;
 
     void reset();
     bool handles(std::uint32_t address) const override;
