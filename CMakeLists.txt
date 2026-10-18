@@ -11,6 +11,8 @@ add_library(satari360_core
     src/core/machine.cpp
     src/core/atari_video.cpp
     src/core/ym2149.cpp
+    src/core/mfp68901.cpp
+    src/core/acia.cpp
 )
 target_include_directories(satari360_core PUBLIC src/core)
 
