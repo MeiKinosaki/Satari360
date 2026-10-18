@@ -89,3 +89,21 @@
 - [ ] Ligar registradores de hardware ao barramento de memória da máquina.
 - [ ] Implementar fetch de pixels/timing de vídeo e síntese de áudio real.
 - [ ] Continuar com MFP/ACIA, teclado/joystick e controladora WD1772.
+
+
+## v1.0b — barramento de dispositivos
+- [x] Criar interface comum `BusDevice` para dispositivos de I/O mapeado.
+- [x] Encaminhar leituras e escritas de 8 bits para dispositivos registrados.
+- [x] Integrar Shifter e PSG ao barramento da máquina.
+- [x] Corrigir o tipo do endereço-base do Shifter para 32 bits.
+
+## v1.1b — registradores iniciais MFP/ACIA
+- [x] Criar latch de registradores do MFP 68901.
+- [x] Criar latches ACIA para portas de teclado e MIDI.
+- [x] Registrar MFP/ACIA no barramento e incluí-los no CMake.
+- [x] Ampliar teste de máquina para acessos mapeados de vídeo, PSG, MFP e ACIA.
+- [ ] Executar compilação e todos os testes em CI; corrigir eventuais falhas.
+- [ ] Implementar semântica real de timers, interrupções, status e dados de ACIA.
+- [ ] Integrar controladora de disquetes WD1772 e mídia `.ST`/`.MSA`.
+- [ ] Implementar renderização Shifter e síntese YM2149.
+- [ ] Preparar e validar toolchain e entrada para Xbox 360.
