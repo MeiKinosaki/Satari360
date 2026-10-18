@@ -2,7 +2,10 @@
 
 namespace satari360 {
 
-Machine::Machine(std::size_t ram_size) : bus_(ram_size), cpu_(bus_) {}
+Machine::Machine(std::size_t ram_size) : bus_(ram_size), video_(), psg_(), cpu_(bus_) {
+    bus_.attach_device(&video_);
+    bus_.attach_device(&psg_);
+}
 
 bool Machine::load_tos_rom(const std::uint8_t* data, std::size_t size) {
     return bus_.load_rom(data, size);
