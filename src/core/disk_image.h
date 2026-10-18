@@ -14,6 +14,8 @@ public:
 
     bool load_st(const std::uint8_t* data, std::size_t size);
     bool load_st_file_bytes(const std::vector<std::uint8_t>& bytes);
+    bool load_msa(const std::uint8_t* data, std::size_t size);
+    bool load_msa_file_bytes(const std::vector<std::uint8_t>& bytes);
     void eject();
 
     bool loaded() const { return !image_.empty(); }
