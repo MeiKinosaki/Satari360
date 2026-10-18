@@ -107,3 +107,17 @@
 - [ ] Integrar controladora de disquetes WD1772 e mídia `.ST`/`.MSA`.
 - [ ] Implementar renderização Shifter e síntese YM2149.
 - [ ] Preparar e validar toolchain e entrada para Xbox 360.
+
+
+## v1.2b — leitor inicial de imagem de disquete ST
+- [x] Criar `DiskImage` para carregar imagem ST raw fornecida em memória.
+- [x] Limitar o tamanho e exigir que a imagem seja múltipla de 512 bytes.
+- [x] Implementar leitura de setores de 512 bytes, somente leitura.
+- [x] Implementar ejeção e preservação da imagem atual quando uma nova imagem inválida é recusada.
+- [x] Adicionar `disk_image_smoke.cpp` e integrar fonte/teste ao CMake.
+- [ ] Executar compilação e todos os testes CTest em CI e registrar o resultado.
+- [ ] Implementar parser `.MSA` e validar imagens reais de forma segura.
+- [ ] Integrar leitura de setores com uma controladora WD1772 realista.
+- [ ] Ligar CPU, mapa de memória e periféricos ao ciclo de execução da máquina.
+- [ ] Continuar com temporização do MFP/ACIA, vídeo Shifter e áudio YM2149.
+- [ ] Construir e validar o alvo Xbox 360 com toolchain adequada; gerar `default.xex` apenas após build real.
