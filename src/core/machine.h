@@ -1,6 +1,8 @@
 #pragma once
 
 #include "m68000.h"
+#include "atari_video.h"
+#include "ym2149.h"
 #include "memory_bus.h"
 
 #include <cstddef>
@@ -16,6 +18,8 @@ public:
 
     MemoryBus& bus() { return bus_; }
     const MemoryBus& bus() const { return bus_; }
+    AtariVideo& video() { return video_; }
+    YM2149& psg() { return psg_; }
     M68000& cpu() { return cpu_; }
     const M68000& cpu() const { return cpu_; }
 
@@ -25,6 +29,8 @@ public:
 
 private:
     MemoryBus bus_;
+    AtariVideo video_;
+    YM2149 psg_;
     M68000 cpu_;
 };
 
