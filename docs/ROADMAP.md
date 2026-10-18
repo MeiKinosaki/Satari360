@@ -121,3 +121,16 @@
 - [ ] Ligar CPU, mapa de memória e periféricos ao ciclo de execução da máquina.
 - [ ] Continuar com temporização do MFP/ACIA, vídeo Shifter e áudio YM2149.
 - [ ] Construir e validar o alvo Xbox 360 com toolchain adequada; gerar `default.xex` apenas após build real.
+
+
+## v1.3b — decodificação MSA inicial
+- [x] Adicionar interface `load_msa` e carregamento por vetor de bytes.
+- [x] Validar magic, geometria, limites de trilha e tamanho máximo da imagem.
+- [x] Decodificar trilhas MSA sem compressão e trilhas com marcador RLE `E5 E5`.
+- [x] Rejeitar imagens truncadas/malformadas sem substituir a mídia já carregada.
+- [x] Adicionar casos de teste para MSA simples, RLE e cabeçalho inválido.
+- [ ] Executar CMake/CTest e validar os casos em CI.
+- [ ] Adicionar testes de fuzz e limites de entrada para o parser.
+- [ ] Ligar `DiskImage` a uma controladora WD1772; o parser sozinho não executa jogos.
+- [ ] Continuar implementação precisa de CPU, mapa de memória, temporização e periféricos.
+- [ ] Construir e validar separadamente o alvo Xbox 360 e o `default.xex`.
