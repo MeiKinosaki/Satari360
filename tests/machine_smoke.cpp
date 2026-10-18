@@ -17,6 +17,12 @@ int main() {
     assert(machine.load_tos_rom(rom, sizeof(rom)));
     assert(machine.reset());
     assert(machine.cpu().pc() == satari360::MemoryBus::kRomBase + 8);
+    machine.bus().write8(0x00FF820C, 0x01);
+    assert(machine.video().resolution() == 1);
+    machine.bus().write8(0x00FF8800, 0x08); // PSG register select
+    machine.bus().write8(0x00FF8802, 0x0F); // PSG data port
+    assert(machine.psg().selected_register() == 8);
+    assert(machine.psg().read_data() == 0x0F);
     assert(machine.run_instructions(2));
     assert(machine.cpu().instructions_executed() == 2);
     return 0;
