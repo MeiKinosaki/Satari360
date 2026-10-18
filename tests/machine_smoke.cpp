@@ -23,6 +23,10 @@ int main() {
     machine.bus().write8(0x00FF8802, 0x0F); // PSG data port
     assert(machine.psg().selected_register() == 8);
     assert(machine.psg().read_data() == 0x0F);
+    machine.bus().write8(0x00FFFA01, 0x5A); // MFP register latch
+    assert(machine.bus().read8(0x00FFFA01) == 0x5A);
+    machine.bus().write8(0x00FFFC00, 0x12); // keyboard ACIA control latch
+    assert(machine.bus().read8(0x00FFFC00) == 0x12);
     assert(machine.run_instructions(2));
     assert(machine.cpu().instructions_executed() == 2);
     return 0;
