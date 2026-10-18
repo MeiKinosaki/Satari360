@@ -6,18 +6,21 @@ namespace satari360 {
 
 MemoryBus::MemoryBus(std::size_t ram_size) : ram_(ram_size, 0) {}
 
+bool MemoryBus::attach_device(BusDevice* device) {
+    if (device == nullptr) return false;
+    if (std::find(devices_.begin(), devices_.end(), device) != devices_.end()) return true;
+    devices_.push_back(device);
+    return true;
+}
+
 bool MemoryBus::load_rom(const std::uint8_t* data, std::size_t size) {
     if (data == nullptr || size == 0 || size > kMaxTosRomSize ||
-        size > 0x01000000u - kRomBase) {
-        return false;
-    }
+        size > 0x01000000u - kRomBase) return false;
     rom_.assign(data, data + size);
     return true;
 }
 
-void MemoryBus::clear_rom() {
-    rom_.clear();
-}
+void MemoryBus::clear_rom() { rom_.clear(); }
 
 bool MemoryBus::is_ram(std::uint32_t address) const {
     return static_cast<std::uint64_t>(address) < ram_.size();
@@ -29,15 +32,16 @@ bool MemoryBus::is_rom(std::uint32_t address) const {
 }
 
 std::uint8_t MemoryBus::read8(std::uint32_t address) const {
+    for (std::vector<BusDevice*>::const_iterator it = devices_.begin(); it != devices_.end(); ++it)
+        if ((*it)->handles(address)) return (*it)->read8(address);
     if (is_ram(address)) return ram_[address];
     if (is_rom(address)) return rom_[address - kRomBase];
-    return 0xFF; // Unmapped bus value for this early skeleton.
+    return 0xFF;
 }
 
 std::uint16_t MemoryBus::read16(std::uint32_t address) const {
-    return static_cast<std::uint16_t>(
-        (static_cast<std::uint16_t>(read8(address)) << 8) |
-        static_cast<std::uint16_t>(read8(address + 1u)));
+    return static_cast<std::uint16_t>((static_cast<std::uint16_t>(read8(address)) << 8) |
+                                      static_cast<std::uint16_t>(read8(address + 1u)));
 }
 
 std::uint32_t MemoryBus::read32(std::uint32_t address) const {
@@ -48,6 +52,9 @@ std::uint32_t MemoryBus::read32(std::uint32_t address) const {
 }
 
 void MemoryBus::write8(std::uint32_t address, std::uint8_t value) {
+    for (std::vector<BusDevice*>::const_iterator it = devices_.begin(); it != devices_.end(); ++it) {
+        if ((*it)->handles(address)) { (*it)->write8(address, value); return; }
+    }
     if (is_ram(address)) ram_[address] = value;
 }
 
