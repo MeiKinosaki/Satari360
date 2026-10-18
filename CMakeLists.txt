@@ -9,6 +9,8 @@ add_library(satari360_core
     src/core/memory_bus.cpp
     src/core/m68000.cpp
     src/core/machine.cpp
+    src/core/atari_video.cpp
+    src/core/ym2149.cpp
 )
 target_include_directories(satari360_core PUBLIC src/core)
 
@@ -21,7 +23,11 @@ target_link_libraries(m68000_smoke PRIVATE satari360_core)
 add_executable(machine_smoke tests/machine_smoke.cpp)
 target_link_libraries(machine_smoke PRIVATE satari360_core)
 
+add_executable(video_psg_smoke tests/video_psg_smoke.cpp)
+target_link_libraries(video_psg_smoke PRIVATE satari360_core)
+
 enable_testing()
 add_test(NAME memory_bus_smoke COMMAND memory_bus_smoke)
 add_test(NAME m68000_smoke COMMAND m68000_smoke)
 add_test(NAME machine_smoke COMMAND machine_smoke)
+add_test(NAME video_psg_smoke COMMAND video_psg_smoke)
