@@ -6,6 +6,14 @@
 
 namespace satari360 {
 
+class BusDevice {
+public:
+    virtual ~BusDevice() {}
+    virtual bool handles(std::uint32_t address) const = 0;
+    virtual std::uint8_t read8(std::uint32_t address) const = 0;
+    virtual void write8(std::uint32_t address, std::uint8_t value) = 0;
+};
+
 class MemoryBus {
 public:
     static constexpr std::uint32_t kRomBase = 0x00E00000;
@@ -13,6 +21,7 @@ public:
 
     explicit MemoryBus(std::size_t ram_size = 1024 * 1024);
 
+    bool attach_device(BusDevice* device);
     bool load_rom(const std::uint8_t* data, std::size_t size);
     void clear_rom();
 
@@ -33,6 +42,7 @@ private:
 
     std::vector<std::uint8_t> ram_;
     std::vector<std::uint8_t> rom_;
+    std::vector<BusDevice*> devices_;
 };
 
 } // namespace satari360
