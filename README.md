@@ -2,7 +2,7 @@
 
 Emulador de Atari ST para Xbox 360.
 
-**Versão:** 1.0b  
+**Versão:** 1.1b  
 **Estado:** estrutura inicial de desenvolvimento; ainda não é um emulador funcional.
 
 ## Objetivo
@@ -25,7 +25,7 @@ Desenvolver uma aplicação para Xbox 360 capaz de emular a família Atari ST, c
 - `docs/ROADMAP.md`: etapas de desenvolvimento
 
 ## Situação da versão 0.9b
-A CPU experimental inclui um conjunto muito limitado de instruções e a classe `Machine` combina CPU e barramento, aceita uma ROM fornecida pelo chamador e executa um orçamento limitado de instruções. Os módulos iniciais Shifter (`atari_video.*`) e PSG YM2149 (`ym2149.*`) agora implementam a interface `BusDevice` e são registrados no `MemoryBus` da classe `Machine`. O teste `machine_smoke.cpp` inclui verificações de acesso a registradores por endereços mapeados. Isso é apenas encaminhamento de registradores; não há renderização de pixels nem geração de áudio. O mapa de memória Atari ST permanece incompleto; MFP/ACIA, WD1772, controles, toolchain Xbox 360 e `default.xex` seguem pendentes. A execução do workflow e dos testes ainda precisa ser confirmada.
+A CPU experimental inclui um conjunto muito limitado de instruções e a classe `Machine` combina CPU e barramento, aceita uma ROM fornecida pelo chamador e executa um orçamento limitado de instruções. Os módulos iniciais Shifter (`atari_video.*`) e PSG YM2149 (`ym2149.*`) implementam `BusDevice` e são registrados no `MemoryBus` da classe `Machine`. Também foram adicionados modelos de registradores para MFP 68901 (`mfp68901.*`) e ACIA (`acia.*`), ligados ao barramento e cobertos por verificações básicas em `machine_smoke.cpp`. São latches de registradores, não periféricos completos: temporizadores, interrupções, protocolo serial, renderização de pixels e geração de áudio real não estão implementados. A compilação e os testes ainda precisam ser executados e confirmados. O mapa de memória Atari ST permanece incompleto; MFP/ACIA, WD1772, controles, toolchain Xbox 360 e `default.xex` seguem pendentes. A execução do workflow e dos testes ainda precisa ser confirmada.
 
 ## Próximas etapas
 1. Completar o mapa de memória Atari ST, incluindo regiões de I/O e registradores de periféricos.
