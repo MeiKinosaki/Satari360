@@ -14,6 +14,7 @@ add_library(satari360_core
     src/core/mfp68901.cpp
     src/core/acia.cpp
     src/core/disk_image.cpp
+    src/core/floppy_controller.cpp
 )
 target_include_directories(satari360_core PUBLIC src/core)
 
@@ -32,9 +33,13 @@ target_link_libraries(video_psg_smoke PRIVATE satari360_core)
 add_executable(disk_image_smoke tests/disk_image_smoke.cpp)
 target_link_libraries(disk_image_smoke PRIVATE satari360_core)
 
+add_executable(floppy_controller_smoke tests/floppy_controller_smoke.cpp)
+target_link_libraries(floppy_controller_smoke PRIVATE satari360_core)
+
 enable_testing()
 add_test(NAME memory_bus_smoke COMMAND memory_bus_smoke)
 add_test(NAME m68000_smoke COMMAND m68000_smoke)
 add_test(NAME machine_smoke COMMAND machine_smoke)
 add_test(NAME video_psg_smoke COMMAND video_psg_smoke)
 add_test(NAME disk_image_smoke COMMAND disk_image_smoke)
+add_test(NAME floppy_controller_smoke COMMAND floppy_controller_smoke)
