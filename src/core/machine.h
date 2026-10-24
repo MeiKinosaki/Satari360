@@ -6,6 +6,7 @@
 #include "memory_bus.h"
 #include "mfp68901.h"
 #include "acia.h"
+#include "floppy_controller.h"
 
 #include <cstddef>
 #include <cstdint>
@@ -24,6 +25,7 @@ public:
     YM2149& psg() { return psg_; }
     MFP68901& mfp() { return mfp_; }
     ACIA& acia() { return acia_; }
+    FloppyController& floppy() { return floppy_; }
     M68000& cpu() { return cpu_; }
     const M68000& cpu() const { return cpu_; }
 
@@ -37,6 +39,7 @@ private:
     YM2149 psg_;
     MFP68901 mfp_;
     ACIA acia_;
+    FloppyController floppy_;
     M68000 cpu_;
 };
 
