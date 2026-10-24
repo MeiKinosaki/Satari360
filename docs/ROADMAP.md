@@ -146,3 +146,16 @@
 - [ ] Substituir registradores simplificados pelo protocolo real WD1772/Glue logic Atari ST.
 - [ ] Corrigir geometria para faces, setores por trilha e formatos variados.
 - [ ] Integrar a controladora ao ciclo da máquina e ao firmware TOS.
+
+
+## v1.4b — integração experimental do controlador de disquete
+- [x] Criar `FloppyController` com registradores simplificados para comando, trilha, setor, status e dados.
+- [x] Montar/ejetar imagens ST e MSA através de `DiskImage`.
+- [x] Adicionar leitura experimental de setor em buffer de 512 bytes.
+- [x] Registrar o controlador na classe `Machine` e no `MemoryBus`.
+- [x] Adicionar teste de fumaça do controlador e teste integrado via barramento da máquina.
+- [ ] Confirmar compilação e execução de todos os testes via GitHub Actions.
+- [ ] Implementar semântica real WD1772, geometria de dupla face e comandos/status corretos.
+- [ ] Conectar eventos de temporização e interrupções do controlador ao MFP/CPU.
+- [ ] Avançar o vídeo Shifter, áudio YM2149 e precisão da CPU em lotes separados.
+- [ ] Validar toolchain Xbox 360 e gerar `default.xex` somente após build bem-sucedido.
