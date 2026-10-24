@@ -134,3 +134,15 @@
 - [ ] Ligar `DiskImage` a uma controladora WD1772; o parser sozinho não executa jogos.
 - [ ] Continuar implementação precisa de CPU, mapa de memória, temporização e periféricos.
 - [ ] Construir e validar separadamente o alvo Xbox 360 e o `default.xex`.
+
+
+## Lote paralelo — controlador de disquete experimental
+- [x] Criar `FloppyController` como dispositivo mapeado no barramento.
+- [x] Adicionar montagem/ejeção para imagens ST e MSA já decodificadas.
+- [x] Implementar comando experimental de leitura de setor em buffer de 512 bytes.
+- [x] Adicionar teste de fumaça para montagem, leitura e erro de setor inválido.
+- [x] Integrar fonte e teste ao CMake.
+- [ ] Confirmar build e execução de todos os testes no CI.
+- [ ] Substituir registradores simplificados pelo protocolo real WD1772/Glue logic Atari ST.
+- [ ] Corrigir geometria para faces, setores por trilha e formatos variados.
+- [ ] Integrar a controladora ao ciclo da máquina e ao firmware TOS.
