@@ -2,7 +2,7 @@
 
 Emulador de Atari ST para Xbox 360.
 
-**Versão:** 1.3b  
+**Versão:** 1.4b  
 **Estado:** estrutura inicial de desenvolvimento; ainda não é um emulador funcional.
 
 ## Objetivo
@@ -15,7 +15,7 @@ Desenvolver uma aplicação para Xbox 360 capaz de emular a família Atari ST, c
 - MFP 68901, ACIA/teclado e temporizadores
 - Áudio YM2149
 - Joystick, teclado e mouse
-- Leitura inicial de imagens raw `.ST` e decodificação básica `.MSA` (somente leitura)
+- Leitura inicial de imagens raw `.ST`/`.MSA` e controlador experimental de setores (somente leitura)
 - Camada de plataforma Xbox 360 e empacotamento `default.xex`
 
 ## Estrutura inicial
