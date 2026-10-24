@@ -27,6 +27,14 @@ int main() {
     assert(machine.bus().read8(0x00FFFA01) == 0x5A);
     machine.bus().write8(0x00FFFC00, 0x12); // keyboard ACIA control latch
     assert(machine.bus().read8(0x00FFFC00) == 0x12);
+
+    std::uint8_t disk_bytes[512] = {};
+    disk_bytes[0] = 0xD1;
+    assert(machine.floppy().mount_st(disk_bytes, sizeof(disk_bytes)));
+    machine.bus().write8(0x00FF8605, 0); // track
+    machine.bus().write8(0x00FF8606, 1); // sector
+    machine.bus().write8(0x00FF8604, satari360::FloppyController::kCommandReadSector);
+    assert(machine.bus().read8(0x00FF8607) == 0xD1);
     assert(machine.run_instructions(2));
     assert(machine.cpu().instructions_executed() == 2);
     return 0;
